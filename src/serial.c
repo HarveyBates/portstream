@@ -154,9 +154,9 @@ void serial_read(void) {
     buf[n_bytes] = 0;
 
     if (serialSettings.with_timestamp) {
-      printf("[%s.%03ld]: %s", fmt_time, get_time_ms(), buf);
+      fprintf(stdout, "[%s.%03ld]: %s", fmt_time, get_time_ms(), buf);
     } else {
-      printf("%s", buf);
+      fprintf(stdout, "%s", buf);
     }
   } while (1);
 
@@ -167,7 +167,7 @@ SerialStatus serial_connect(void) {
   fd = open(serialDevice.port, O_RDONLY | O_NOCTTY | O_NONBLOCK);
 
   if (fd < 0) {
-    printf("Unable to open port: %s\n", serialDevice.port);
+    fprintf(stderr, "Unable to open port: %s\n", serialDevice.port);
     return SERIAL_ERROR;
   }
 
@@ -177,7 +177,7 @@ SerialStatus serial_connect(void) {
   tcflush(fd, TCIOFLUSH);
 
   if (serial_set_serial_attr() != SERIAL_OK) {
-    printf("Unable to apply serial attributes.\n");
+    fprintf(stderr, "Unable to apply serial attributes.\n");
     return SERIAL_ERROR;
   }
 

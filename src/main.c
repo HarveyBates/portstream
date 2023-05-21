@@ -60,18 +60,18 @@ int main(int argc, char** argv) {
         printf("option req value\n");
         break;
       default:
-        fprintf(stderr, "USAGE: %s [-ilw] [file...]\n", argv[0]);
+        fprintf(stderr, "USAGE: %s [-pbtc] [file...]\n", argv[0]);
         exit(EXIT_FAILURE);
     }
   }
 
   if (set_port != SERIAL_OK) {
-    printf("Unable to connect to port: %s\n", port);
+    fprintf(stderr, "Unable to connect to port: %s\n", port);
     exit(EXIT_FAILURE);
   }
 
   if (set_br != SERIAL_OK) {
-    printf("Setup of baud-rate: %s failed.\n", baud_rate);
+    fprintf(stderr, "Setup of baud-rate: %s failed.\n", baud_rate);
     exit(EXIT_FAILURE);
   }
 
